@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Gumby Programming</title>
+<link href="css/gumby.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="js/libs/jquery-1.9.1.min.js"></script>
+<script src="js/libs/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
+<script src="js/libs/gumby.min.js"></script>
+<script src="js/libs/gumby.init.js"></script>
+<script src="js/main.js"></script>
+<script src="js/plugins.js"></script>
+<style>
+  canvas {
+    background: #eee;
+  }
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="row">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Academics</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Experience</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row component">
+
+  <canvas id="video" width="800" height="400">
+    <video id="rick_ashley" src="videos/RickRollD.mp4"></video>
+  </canvas>
+  </div>
+  <div class="row">
+    <div id="video-button" class="pretty medium primary btn"><a href="#">Pause</a></div>
+    <div id="invert-button" class="pretty medium primary btn"><a href="#">Invert</a></div>
+    <div id="rotate-button" class="pretty medium primary btn"><a href="#">Rotate</a></div>
+  </div>
+  <div class="row">
+    <canvas id="pixelated_map" width="800" height="400"></canvas>
+  </div>
+  <script type="text/javascript">
+
+    var inMemoryCanvas = document.createElement("canvas");
+    var inMemoryContext = inMemoryCanvas.getContext('2d');
+    var drawFunction = drawMediaToContext;
+    var continuePlaying = false;
+    var rotate = false;
+    var rotation = 0;
+
+    window.onload = function() {
+      var canvas = document.getElementById("video");
+      inMemoryCanvas.width = canvas.width;
+      inMemoryCanvas.height = canvas.height;
+      var context = canvas.getContext('2d');
+      context.translate( canvas.width / 2, canvas.height / 2 );
+		  var video = document.getElementById("rick_ashley");
+      video.addEventListener( 'play', function(){
+        draw( canvas, video );
+      }, true );
+
+      var playButton = document.getElementById("video-button");
+      playButton.addEventListener("click", function() {
+        var element = toggleVideo( video );
+        continuePlaying = !continuePlaying;
+      }, true);
+
+      var invertButton = document.getElementById("invert-button");
+      invertButton.addEventListener("click", function() {
+        if( drawFunction == drawMediaToContext ) {
+          drawFunction = drawMediaInvertedToContext;
+        }
+        else {
+          drawFunction = drawMediaToContext;
+        }
+
+      }, true );
+
+      var rotateButton = document.getElementById("rotate-button");
+      rotateButton.addEventListener("click", function() {
+        rotate = !rotate;
+      }, true);
+	  }
+
+    function draw( canvas, video ) {
+     //canvas.width = canvas.width;
+     // canvas.height = canvas.height;
+      var context = canvas.getContext('2d');
+      context.clearRect( -canvas.width, -canvas.height, canvas.width + 200, canvas.height + 200);
+      if( rotate)
+        context.rotate( 0.02 );
+
+      var pixelatedContext = document.getElementById('pixelated_map').getContext('2d');
+      drawFunction( canvas, video );
+      scrambleVideo( pixelatedContext, video );
+      if( continuePlaying )
+        setTimeout( draw, 16, canvas, video );
+    }
+
+    function toggleVideo( video ) {
+      var linkText = document.createElement("a");
+      linkText.setAttribute("href","#");
+
+      if( !video.paused ) {
+        video.pause();
+        linkText.innerHtml = "Play";
+      }
+      else {
+        video.play();
+        linkText.innerHtml = "Pause";
+      }
+
+      return linkText;
+    }
+
+    function drawMediaToContext( canvas, media ) {
+      var centerX = media.videoWidth / 2;
+      var centerY = media.videoHeight / 2;
+      var context = canvas.getContext( "2d" );
+      context.drawImage( media, -centerX, -centerY, media.videoWidth, media.videoHeight );
+    }
+
+    function drawMediaInvertedToContext( canvas, media ) { 
+      inMemoryContext.drawImage( media, 0, 0, media.videoWidth, media.videoHeight );
+      var imageData = inMemoryContext.getImageData( 0, 0, media.videoWidth, media.videoHeight );
+      var data = imageData.data;
+
+      for( var i = 0; i < data.length; i += 4 ) {
+        data[i] = 255 - data[i];
+        data[i+1] = 255 - data[i+1];
+        data[i+2] = 255 - data[i+2];
+      }
+      
+      imageData.data = data;
+      inMemoryContext.putImageData( imageData, 0, 0 );
+
+      var context = canvas.getContext( "2d" );
+      var centerX = media.videoWidth / 2;
+      var centerY = media.videoHeight / 2;
+      context.drawImage( inMemoryCanvas,0,0,media.videoWidth,media.videoHeight, -centerX, -centerY, media.videoWidth, media.videoHeight);
+    }
+
+    function drawPixelatedVideo( context, video ) {
+      for( var i = 0; i < video.videoWi = oidth; ++i ) {
+        for( var j = 0; j < video.videoHeight; ++j ) {
+          context.drawImage( video, i, j, 1, 1,  i * 2, j * 2, 2, 2 );
+        }
+      }
+    }
+
+    function scrambleVideo( context, video ) {
+      var width = video.videoWidth / 10;
+      var height = video.videoHeight / 5;
+
+      var tiles = new Array(19,25,47,45,21,0,40,27,27,16,1,18,35,46,47,9,17,18,41,25,1,8,0,27,36,7,18,19,34,35,36,17,9,48,30,29,41,18,47,26,31,17,33,47,19,31,33,3,5,45);
+
+      for( var i = 0; i < tiles.length; ++i ) {
+        context.drawImage( video, tiles[i] % 10 * width, Math.floor( tiles[i] / 10 ) * height, width, height, (i % 10) * width, Math.floor(i / 10) * height, width, height );
+      }
+
+    }
+  
+/*
+  function drawMediaScaledToContext( context, media, x, y, width, height, canvasX, canvasY, canvasWidth, canvasHeight ) {
+    context.drawImage( media, x, y, width, height, canvasX, canvasY, canvasWidth, canvasHeight );
+  }
+
+  function drawMediaPixelatedToContext( context, media, x, y, width, height, canvasWidth, canvasHeight, tileSize ) {
+    
+  }
+*/
+</script>
+</body>
+</html>

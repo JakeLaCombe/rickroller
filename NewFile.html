@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Gumby Programming</title>
+<link href="css/gumby.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="js/libs/jquery-1.9.1.min.js"></script>
+<script src="js/libs/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
+<script src="js/libs/gumby.min.js"></script>
+<script src="js/libs/gumby.init.js"></script>
+<script src="js/main.js"></script>
+<script src="js/plugins.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="row">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Academics</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Experience</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row main-container">
+    <div class="row heading-section">
+      <ul class="slideshow main-slideshow">
+        <li>
+          <img src="https://sphotos-b.xx.fbcdn.net/hphotos-ash3/941176_588186027871968_475380211_n.jpg"/>
+        </li>
+        <li>
+          <img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-ash3/73177_10151631305558453_868299309_n.jpg"/>
+        </li>
+        <li>
+          <img src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-ash3/182382_394148780668673_1359150321_n.jpg"/>
+        </li>
+        <li>
+          <img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-prn1/134226_561710801140_526321054_o.jpg"/>
+        </li>
+      </ul>
+    </div>
+    <hr/>
+    <div class="row">
+    <div class="eight columns">
+      <h2>June 3, 2013</h2>
+      <p>Heard the news about Google going after Microsoft? Apparantly, Microsoft released their own Version of the YouTube app without Google's permission.</p>
+      <h2>June 2, 2013</h2>
+      <p>This is my amazing text that I am rendering inside my component! I hope you like the great work I've done with Gumby!!!</p>
+    </div>
+    <div class="four columns">
+      <img src="https://graph.facebook.com/jake.lacombe1/picture?type=large"/>
+       <h2>Company</h2>
+       <p>Cerner Corporation</p>
+       <h2>Position</h2>
+       <p>Web Developer</p>
+       <h2>Specialties</h2>
+       <ul>
+         <li>Web Development</li>
+         <li>Adobe Flash Development</li>
+         <li>Java Development</li>
+         <li>Android Developmet</li>
+       </ul>
+    </div>
+  </div>
+  </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+	    $('.slideshow').cycle({
+			fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+		});
+	});
+  </script>
+</body>
+</html>

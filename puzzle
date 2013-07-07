@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Gumby Programming</title>
+<link href="css/gumby.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="js/libs/jquery-1.9.1.min.js"></script>
+<script src="js/libs/modernizr-2.6.2.min.js"></script>
+<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
+<script src="js/libs/gumby.min.js"></script>
+<script src="js/libs/gumby.init.js"></script>
+<script src="js/main.js"></script>
+<script src="js/plugins.js"></script>
+<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.5.4.min.js"></script> 
+<style>
+  canvas {
+    background: #eee;
+  }
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="row">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Academics</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Experience</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row component">
+
+  <div id="video">
+  </div>
+  <video id="rick_ashley" src="videos/RickRollD.mp4"></video>
+  <script>
+    var stage = new Kinetic.Stage({
+      container: 'container',
+      width: 578,
+      height: 200
+    });
+
+    var layer = new Kinetic.Layer();
+
+    var rect = new Kinetic.Rect({
+      x: 239,
+      y: 75,
+      width: 100,
+      height: 50,
+      fill: 'green',
+      stroke: 'black',
+      strokeWidth: 4
+    });
+
+    layer.add(rect);
+    stage.add(layer);
+  </script>
+</body>
+</html>
